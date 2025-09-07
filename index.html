@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoinBit</title>
+  <style>
+    /* General Styling */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0; padding: 0;
+      background: #f4f7fb;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(135deg, #ff5722, #ff784e);
+      color: #fff;
+      padding: 15px 20px;
+      display: flex; justify-content: space-between; align-items: center;
+      position: sticky; top: 0; z-index: 100;
+    }
+    header h1 { margin: 0; font-size: 22px; font-weight: bold; }
+    nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
+    nav li { margin-left: 20px; }
+    nav a { color: #fff; text-decoration: none; font-weight: 500; }
+    nav a:hover { text-decoration: underline; }
+
+    main { padding: 20px; }
+
+    h2 { color: #ff5722; margin-bottom: 15px; }
+
+    .page-section {
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      background: #ff5722;
+      color: #fff; border: none;
+      padding: 12px 20px;
+      margin: 10px 5px;
+      cursor: pointer;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    .btn:hover { background: #e64a19; }
+
+    /* Modal */
+    .modal {
+      display: none; position: fixed; z-index: 1000; left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center; align-items: center;
+    }
+    .modal-content {
+      background: #fff;
+      padding: 20px;
+      width: 95%; max-width: 400px;
+      border-radius: 12px;
+      position: relative;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .close {
+      position: absolute; right: 10px; top: 10px;
+      cursor: pointer; font-size: 22px; color: #333;
+    }
+
+    label { display: block; margin-top: 12px; font-weight: 600; color: #555; }
+    input, select {
+      width: 100%; padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc; border-radius: 6px;
+    }
+
+    .pay-info {
+      margin-top: 15px; padding: 12px;
+      background: #fff8f3;
+      border: 1px solid #ffdabd;
+      border-radius: 8px;
+    }
+    .pay-info p { margin: 5px 0; }
+
+    /* Offers Section */
+    .offers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+    .offer-card {
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: 0.3s;
+    }
+    .offer-card:hover { transform: translateY(-5px); }
+    .offer-card h3 { margin: 0; color: #ff5722; }
+    .offer-card p { margin: 8px 0; font-size: 14px; }
+
+    /* Contact Section */
+    .contact-info {
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      max-width: 500px;
+    }
+    .contact-info p { margin: 10px 0; }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header { flex-direction: column; align-items: flex-start; }
+      nav ul { flex-direction: column; margin-top: 10px; }
+      nav li { margin: 8px 0; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CoinBit</h1>
+    <nav>
+      <ul>
+        <li><a href="#" onclick="showSection('home')">Home</a></li>
+        <li><a href="#" onclick="showSection('offers')">Offers</a></li>
+        <li><a href="#" onclick="showSection('about')">About Us</a></li>
+        <li><a href="#" onclick="showSection('contact')">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HOME -->
+    <section id="home" class="page-section">
+      <h2>Welcome to CoinBit 🚀</h2>
+      <p>
+        CoinBit is your one-stop platform for buying and selling cryptocurrency 
+        securely via M-Pesa. Whether you want to purchase USDT for trading 
+        or cash out your earnings, we’ve made it simple and fast.
+      </p>
+      <p>
+        Our mission is to empower traders across Kenya with reliable, 
+        transparent, and affordable crypto exchange services.
+      </p>
+      <button onclick="openModal('buy')" class="btn">Buy</button>
+      <button onclick="openModal('sell')" class="btn">Sell</button>
+    </section>
+
+    <!-- OFFERS -->
+    <section id="offers" class="page-section" style="display:none;">
+      <h2>🔥 Our Trading Offers</h2>
+      <div class="offers-grid">
+        <div class="offer-card">
+          <h3>1 – 13 USD</h3>
+          <p><b>Buy:</b> 131 KES</p>
+          <p><b>Sell:</b> 124 KES</p>
+        </div>
+        <div class="offer-card">
+          <h3>14 – 27 USD</h3>
+          <p><b>Buy:</b> 130 KES</p>
+          <p><b>Sell:</b> 126 KES</p>
+        </div>
+        <div class="offer-card">
+          <h3>28+ USD</h3>
+          <p><b>Buy:</b> 129 KES</p>
+          <p><b>Sell:</b> 127 KES</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="page-section" style="display:none;">
+      <h2>About Us</h2>
+      <p>
+        At CoinBit, we believe that financial freedom should be accessible to 
+        everyone. With years of experience in peer-to-peer trading, we’ve built 
+        a platform that prioritizes <b>trust, speed, and customer satisfaction</b>.
+      </p>
+      <p>
+        We offer competitive exchange rates and a user-friendly interface to make 
+        crypto trading seamless for both beginners and experts.
+      </p>
+      <p><b>Founder & CEO:</b> Denis Mariita</p>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="page-section" style="display:none;">
+      <h2>Contact Us 📞</h2>
+      <div class="contact-info">
+        <p>📍 Location: Nairobi, Kenya</p>
+        <p>📞 Phone: <a href="tel:+254759354842">+254 759 354 842</a></p>
+        <p>💬 WhatsApp: <a href="https://wa.me/254759354842" target="_blank">Chat Now</a></p>
+        <p>✉️ Email: support@coinbit.com</p>
+        <p>⏰ Working Hours: 8:00 AM – 11:00 PM (Mon – Sun)</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="modal-title">Trade</h2>
+
+      <label>Choose Exchange</label>
+      <select id="exchange" onchange="handleExchangeChange()">
+        <option value="">Select exchange</option>
+        <option value="Binance">Binance</option>
+        <option value="OKX">OKX</option>
+        <option value="Bybit">Bybit</option>
+      </select>
+
+      <!-- BUY -->
+      <div id="buyFields" style="display:none;">
+        <label id="buyUidLabel">Enter your exchange UID</label>
+        <input id="buyUid" type="text" placeholder="Enter your exchange UID" />
+
+        <label>Amount (USD)</label>
+        <input id="buyAmount" type="number" min="1" placeholder="Enter amount in USD" oninput="updateKesAmount()" />
+
+        <label>Amount to Pay (KES)</label>
+        <input id="buyKes" type="text" readonly placeholder="KES will auto-calc" />
+
+        <div class="pay-info">
+          <p><strong>Send Payment To:</strong></p>
+          <p style="color:#ff5722; font-size:18px; font-weight:bold;">0759354842</p>
+          <p>After paying, tap "Send" and share your M-Pesa message via WhatsApp.</p>
+        </div>
+      </div>
+
+      <!-- SELL -->
+      <div id="sellFields" style="display:none;">
+        <label>Exchange UID</label>
+        <input id="sellUid" type="text" readonly />
+        <button onclick="copyUid()">Copy UID</button>
+
+        <label>Amount (USD)</label>
+        <input id="sellAmount" type="number" min="1" placeholder="Enter amount in USD" oninput="updateSellKes()" />
+
+        <label>Amount to Receive (KES)</label>
+        <input id="sellKes" type="text" readonly placeholder="KES will auto-calc" />
+
+        <label>Your M-Pesa Number</label>
+        <input id="sellerPhone" type="text" placeholder="Enter your M-Pesa number" />
+
+        <label>Name Registered on M-Pesa</label>
+        <input id="sellerName" type="text" placeholder="Enter registered name" />
+      </div>
+
+      <button class="btn" onclick="shareOnWhatsApp()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    let tradeType = "";
+    const fixedUIDs = {
+      "Binance": "761945402",
+      "OKX": "483357627414418340",
+      "Bybit": "Coming Soon"
+    };
+
+    function showSection(section) {
+      document.querySelectorAll(".page-section").forEach(s => s.style.display = "none");
+      document.getElementById(section).style.display = "block";
+    }
+
+    function openModal(type) {
+      tradeType = type;
+      document.getElementById("modal").style.display = "flex";
+      document.getElementById("modal-title").innerText = type === "buy" ? "Buy Crypto" : "Sell Crypto";
+      document.getElementById("buyFields").style.display = type === "buy" ? "block" : "none";
+      document.getElementById("sellFields").style.display = type === "sell" ? "block" : "none";
+    }
+
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+
+    function handleExchangeChange() {
+      const exch = document.getElementById("exchange").value;
+      if (tradeType === "sell") {
+        document.getElementById("sellUid").value = fixedUIDs[exch] || "";
+      }
+    }
+
+    function copyUid() {
+      const uid = document.getElementById("sellUid");
+      uid.select();
+      document.execCommand("copy");
+      alert("UID copied: " + uid.value);
+    }
+
+    function updateKesAmount() {
+      const usd = parseFloat(document.getElementById("buyAmount").value) || 0;
+      let rate = 0;
+
+      if (usd >= 1 && usd <= 13) rate = 131;
+      else if (usd >= 14 && usd <= 27) rate = 130;
+      else if (usd >= 28) rate = 129;
+
+      const kes = usd * rate;
+      document.getElementById("buyKes").value = kes > 0 ? kes + " KES" : "";
+    }
+
+    function updateSellKes() {
+      const usd = parseFloat(document.getElementById("sellAmount").value) || 0;
+      let rate = 0;
+
+      if (usd >= 1 && usd <= 13) rate = 124;
+      else if (usd >= 14 && usd <= 27) rate = 126;
+      else if (usd >= 28) rate = 127;
+
+      const kes = usd * rate;
+      document.getElementById("sellKes").value = kes > 0 ? kes + " KES" : "";
+    }
+
+    function shareOnWhatsApp() {
+      const exch = document.getElementById("exchange").value;
+      let message = "";
+
+      if (tradeType === "buy") {
+        const amount = document.getElementById("buyAmount").value;
+        const uid = document.getElementById("buyUid").value;
+        const kes = document.getElementById("buyKes").value;
+        if (!exch || !amount || !uid || !kes) return alert("Please fill all fields.");
+        message = `✅ CoinBit Buy\nExchange: ${exch}\nAmount: ${amount} USD\nUID: ${uid}\nAmount Paid: ${kes}\n\nI have paid via M-Pesa to 0759354842.`;
+      } else {
+        const amount = document.getElementById("sellAmount").value;
+        const kes = document.getElementById("sellKes").value;
+        const phone = document.getElementById("sellerPhone").value;
+        const name = document.getElementById("sellerName").value;
+        if (!exch || !amount || !phone || !name || !kes) return alert("Please fill all fields.");
+        message = `I have paid ${amount} USD to ${exch}.\n\nNow send ${kes} to:\nM-Pesa Number: ${phone}\nName: ${name}`;
+      }
+
+      const operator = "254759354842"; 
+      const waUrl = `https://wa.me/${operator}?text=${encodeURIComponent(message)}`;
+      window.open(waUrl, "_blank");
+
+      closeModal();
+    }
+  </script>
+</body>
+</html>
